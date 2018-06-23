@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Container, Row, Col, Jumbotron, Button } from 'reactstrap';
+import axios from 'axios'
+import { Container, Row, Col } from 'reactstrap'
 import Context from './context'
 
 interface TemplateState {
@@ -11,6 +12,12 @@ class Template extends React.Component<{}, TemplateState> {
     id: 0
   }
   componentDidMount() {
+    axios.get(`https://jsonplaceholder.typicode.com/todos`).then(res => {
+      const list = res.data;
+      console.log('BBBBBBB', list)
+      // this.setState({ persons });
+    })
+
     this.setState(prevState => ({
       ...prevState,
       id: 1
@@ -22,15 +29,7 @@ class Template extends React.Component<{}, TemplateState> {
         <Container>
           <Row>
             <Col>
-              <Jumbotron>
-                <h1 className="display-3">Hello, world!</h1>
-                <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
-                <hr className="my-2" />
-                <p>It uses utility classes for typgraphy and spacing to space content out within the larger container.</p>
-                <p className="lead">
-                  <Button color="primary">Learn More</Button>
-                </p>
-              </Jumbotron>
+                <h1 className="display-3">Wishlist</h1>
             </Col>
           </Row>
           <Row>

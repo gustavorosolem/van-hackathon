@@ -1,17 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-
 module.exports = {
-  mode: 'development',
   entry: {
     main: './src/app.tsx'
   },
   output: {
     path: path.join(__dirname, '../dist/'),
     filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js'
   },
-  watch: true,
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
