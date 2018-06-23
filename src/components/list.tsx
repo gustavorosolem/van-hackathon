@@ -13,7 +13,6 @@ class List extends React.Component<ListProps, {}> {
       <ListGroup style={{marginBottom: 20}}>
         {itemsList && itemsList.map((element, index) => {
           const title = element.name
-          console.log(title)
           return (
             <ListGroupItem key={index}>{title}</ListGroupItem>
           )

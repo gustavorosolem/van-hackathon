@@ -44,6 +44,7 @@ class Template extends React.Component<{}, TemplateState> {
   }
   render() {
     const { list, loading } = this.state
+    console.log(loading)
     return (
       <Context.Provider value={list}>
         <Container>
@@ -61,7 +62,9 @@ class Template extends React.Component<{}, TemplateState> {
             <Col>
               {loading ? (
                 <div style={{textAlign: 'center'}}>
-                  <ReactLoading type="spin" color="#CCC" height={10} width={10} />
+                  <div style={{display: 'inline-block'}}>
+                    <ReactLoading type="spin" color="#CCC" height={50} width={50} />
+                  </div>
                 </div>
               ) : <List />}
             </Col>
