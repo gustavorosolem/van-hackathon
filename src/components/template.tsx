@@ -27,7 +27,7 @@ class Template extends React.Component<{}, TemplateState> {
       ...prevState,
       loading: true
     }))
-    axios.get(`http://${hostname}/products/`).then(res => {
+    axios.get(`//${hostname}/products/`).then(res => {
       const list = res.data;
       console.log('LIST = ', list)
       this.setState(prevState => ({

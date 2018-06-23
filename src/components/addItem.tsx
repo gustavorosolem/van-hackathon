@@ -32,7 +32,7 @@ class AddItem extends React.Component<AddItemProps, AddItemState> {
       name: this.state.value
     }
     console.log(data)
-    axios.post(`http://${hostname}/products/add`, JSON.stringify(data), {
+    axios.post(`//${hostname}/products/add`, JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json'
       }
