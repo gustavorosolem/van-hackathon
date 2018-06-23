@@ -3,14 +3,21 @@ import * as React from 'react'
 import ContextHOC from './hoc'
 
 interface ListProps {
-  id: number
+  itemsList: any
 }
 
 class List extends React.Component<ListProps, {}> {
   render() {
     console.log('affffff', this.props)
+    const { itemsList } = this.props
     return (
-      <div>OLA</div>
+      <ul>
+        {itemsList && itemsList.map((element, index) => {
+          return (
+            <li key={index}>{element.title}</li>
+          )
+        })}
+      </ul>
     )
   }
 }
