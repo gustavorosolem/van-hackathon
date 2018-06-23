@@ -7,6 +7,7 @@ const hostname = '34.217.212.155:8080'
 
 interface AddItemState {
   sending: boolean
+  value: string
 }
 
 interface AddItemProps {
@@ -15,7 +16,11 @@ interface AddItemProps {
 
 class AddItem extends React.Component<AddItemProps, AddItemState> {
   state = {
-    sending: false
+    sending: false,
+    value: ''
+  }
+  handleChange = e => {
+    this.setState({ value: e.target.value })
   }
   onFormSubmit = e => {
     e.preventDefault() // Stop form submit
@@ -24,7 +29,7 @@ class AddItem extends React.Component<AddItemProps, AddItemState> {
       sending: true
     }))
     const data = {
-      name: e.target[0].value
+      name: this.state.value
     }
     console.log(data)
     axios.post(`http://${hostname}/products/add`, JSON.stringify(data), {
@@ -33,15 +38,16 @@ class AddItem extends React.Component<AddItemProps, AddItemState> {
       }
     }).then(res => {
       console.log(res.data)
-      // this.props.updateItems()
-      window.location.reload()
+      this.setState({ value: '' })
+      this.props.updateItems()
     }).catch(res => {
+      console.log(res)
+      alert('Error. Try again')
+    }).then(() => {
       this.setState(prevState => ({
         ...prevState,
         sending: false
       }))
-      console.log(res)
-      alert('Error. Try again')
     })
   }
   render() {
@@ -51,7 +57,7 @@ class AddItem extends React.Component<AddItemProps, AddItemState> {
         <Form onSubmit={this.onFormSubmit}>
           <FormGroup>
             <Label for="exampleEmail">Product</Label>
-            <Input type="text" name="product" ref="product" placeholder="Add new product" />
+            <Input type="text" name="product" ref="product" value={this.state.value} onChange={this.handleChange} placeholder="Add new product" />
           </FormGroup>
           <Button color="primary" disabled={sending}>Submit</Button>
         </Form>

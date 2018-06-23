@@ -8,7 +8,7 @@ const ContextHOC = WrappedComponent => {
       return (
         <Context.Consumer>
           {itemsList => {
-            console.log('OOOOOOOOOO', itemsList)
+            console.log('ITEMS INSIDE HOC = ', itemsList)
             return <WrappedComponent {...props} itemsList={itemsList || null} />
           }}
         </Context.Consumer>

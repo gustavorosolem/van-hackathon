@@ -22,14 +22,14 @@ class Template extends React.Component<{}, TemplateState> {
   componentDidMount() {
     this.getItems()
   }
-  getItems() {
+  getItems = () => {
     this.setState(prevState => ({
       ...prevState,
       loading: true
     }))
     axios.get(`http://${hostname}/products/`).then(res => {
       const list = res.data;
-      console.log('BBBBBBB', list)
+      console.log('LIST = ', list)
       this.setState(prevState => ({
         ...prevState,
         list: list
@@ -37,8 +37,7 @@ class Template extends React.Component<{}, TemplateState> {
     }).catch(res => {
       console.log(res)
       alert('Error. Try again')
-    }).then(res => {
-      console.log(res)
+    }).then(() => {
       this.setState(prevState => ({
         ...prevState,
         loading: false
@@ -47,7 +46,6 @@ class Template extends React.Component<{}, TemplateState> {
   }
   render() {
     const { list, loading } = this.state
-    console.log(loading)
     return (
       <Context.Provider value={list}>
         <Container>
