@@ -2,6 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { Container, Row, Col } from 'reactstrap'
 import Context from './context'
+import List from './list'
 
 interface TemplateState {
   id: number
@@ -9,13 +10,22 @@ interface TemplateState {
 
 class Template extends React.Component<{}, TemplateState> {
   state = {
-    id: 0
+    id: 0,
+    list: [
+      {
+        title: String,
+        id: String
+      }
+    ]
   }
   componentDidMount() {
     axios.get(`https://jsonplaceholder.typicode.com/todos`).then(res => {
       const list = res.data;
       console.log('BBBBBBB', list)
-      // this.setState({ persons });
+      this.setState(prevState => ({
+        ...prevState,
+        list: list
+      }))
     })
 
     this.setState(prevState => ({
@@ -24,6 +34,7 @@ class Template extends React.Component<{}, TemplateState> {
     }))
   }
   render() {
+    const { list } = this.state
     return (
       <Context.Provider value={this.state.id}>
         <Container>
@@ -33,10 +44,16 @@ class Template extends React.Component<{}, TemplateState> {
             </Col>
           </Row>
           <Row>
-            <Col>.col</Col>
-            <Col>.col</Col>
-            <Col>.col</Col>
-            <Col>.col</Col>
+            <Col>
+              <List />
+              <ul>
+                {list && list.map((element, index) => {
+                  return (
+                    <li key={index}>{element.title}</li>
+                  )
+                })}
+              </ul>
+            </Col>
           </Row>
           <Row>
             <Col xs="3">.col-3</Col>
