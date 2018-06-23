@@ -6,7 +6,7 @@ import Context from './context'
 import List from './list'
 import AddItem from './addItem'
 
-const hostname = '34.217.212.155'
+const hostname = '34.217.212.155:8080'
 // const hostname = '172.16.12.63:8080'
 
 interface TemplateState {

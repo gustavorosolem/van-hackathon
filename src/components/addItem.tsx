@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
-const hostname = '34.217.212.155'
+const hostname = '34.217.212.155:8080'
 // const hostname = '172.16.12.63:8080'
 
 interface AddItemState {
