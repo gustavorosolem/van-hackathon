@@ -6,6 +6,9 @@ import Context from './context'
 import List from './list'
 import AddItem from './addItem'
 
+const hostname = '34.217.212.155'
+// const hostname = '172.16.12.63:8080'
+
 interface TemplateState {
   list: any
   loading: boolean
@@ -24,7 +27,7 @@ class Template extends React.Component<{}, TemplateState> {
       ...prevState,
       loading: true
     }))
-    axios.get(`http://172.16.12.63:8080/products/`).then(res => {
+    axios.get(`http://${hostname}/products/`).then(res => {
       const list = res.data;
       console.log('BBBBBBB', list)
       this.setState(prevState => ({

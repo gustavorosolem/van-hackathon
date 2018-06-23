@@ -2,6 +2,9 @@ import * as React from 'react'
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
+const hostname = '34.217.212.155'
+// const hostname = '172.16.12.63:8080'
+
 interface AddItemState {
   sending: boolean
 }
@@ -24,7 +27,7 @@ class AddItem extends React.Component<AddItemProps, AddItemState> {
       name: e.target[0].value
     }
     console.log(data)
-    axios.post(`http://172.16.12.63:8080/products/add`, JSON.stringify(data), {
+    axios.post(`http://${hostname}/products/add`, JSON.stringify(data), {
       headers: {
         'Content-Type': 'application/json'
       }
