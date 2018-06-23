@@ -1,45 +1,69 @@
 import * as React from 'react'
 import axios from 'axios'
 import { Container, Row, Col } from 'reactstrap'
+import ReactLoading from 'react-loading'
 import Context from './context'
 import List from './list'
+import AddItem from './addItem'
 
 interface TemplateState {
   list: any
+  loading: boolean
 }
 
 class Template extends React.Component<{}, TemplateState> {
   state = {
-    list: [
-      {
-        title: String,
-        id: String
-      }
-    ]
+    list: [],
+    loading: false
   }
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/todos`).then(res => {
+    this.getItems()
+  }
+  getItems() {
+    this.setState(prevState => ({
+      ...prevState,
+      loading: true
+    }))
+    axios.get(`http://172.16.12.63:8080/products/`).then(res => {
       const list = res.data;
       console.log('BBBBBBB', list)
       this.setState(prevState => ({
         ...prevState,
         list: list
       }))
+    }).catch(res => {
+      console.log(res)
+      alert('Error. Try again')
+    }).then(res => {
+      console.log(res)
+      this.setState(prevState => ({
+        ...prevState,
+        loading: false
+      }))
     })
   }
   render() {
-    const { list } = this.state
+    const { list, loading } = this.state
     return (
       <Context.Provider value={list}>
         <Container>
           <Row>
             <Col>
-                <h1 className="display-3">Wishlist</h1>
+              <h1 className="display-4">Wishlist</h1>
             </Col>
           </Row>
           <Row>
             <Col>
-              <List />
+              <AddItem updateItems={this.getItems} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              {loading ? (
+                <div style={{textAlign: 'center'}}>
+                  <ReactLoading type="spin" color="#CCC" height={10} width={10} />
+                </div>
+              ) : <List />}
             </Col>
           </Row>
         </Container>

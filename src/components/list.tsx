@@ -1,5 +1,5 @@
 import * as React from 'react'
-// import { Container, Row, Col } from 'reactstrap'
+import { ListGroup, ListGroupItem } from 'reactstrap'
 import ContextHOC from './hoc'
 
 interface ListProps {
@@ -8,16 +8,17 @@ interface ListProps {
 
 class List extends React.Component<ListProps, {}> {
   render() {
-    console.log('affffff', this.props)
     const { itemsList } = this.props
     return (
-      <ul>
+      <ListGroup style={{marginBottom: 20}}>
         {itemsList && itemsList.map((element, index) => {
+          const title = element.name
+          console.log(title)
           return (
-            <li key={index}><span>oi - {element.title}</span></li>
+            <ListGroupItem key={index}>{title}</ListGroupItem>
           )
         })}
-      </ul>
+      </ListGroup>
     )
   }
 }

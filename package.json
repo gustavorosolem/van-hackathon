@@ -13,6 +13,7 @@
     "bootstrap": "4.0.0-beta",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-loading": "^2.0.2",
     "reactstrap": "^6.1.0"
   },
   "devDependencies": {
